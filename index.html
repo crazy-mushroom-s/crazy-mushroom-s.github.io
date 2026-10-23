@@ -1,1 +1,133 @@
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRAZY MUSHROOM</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #101521;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+main {
+  width: 92%;
+  max-width: 600px;
+  margin: auto;
+  padding: 30px 0 60px;
+}
+h1 {
+  color: #f5bd4c;
+  font-size: clamp(28px, 8vw, 44px);
+}
+.card {
+  width: 100%;
+  background: #222d43;
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 25px;
+}
+.profile {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+}
+h2 { color: #f5bd4c; }
+p { line-height: 1.7; }
+.address {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.button {
+  display: block;
+  width: 100%;
+  padding: 17px 10px;
+  margin: 15px 0;
+  background: #f5bd4c;
+  color: #172033;
+  border: 0;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.qr {
+  width: 200px;
+  max-width: 100%;
+  padding: 8px;
+  background: white;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+<main>
+
+<h1>CRAZY MUSHROOM</h1>
+
+<section class="card">
+  <img class="profile"
+       src="SHIN-CHAN プロフィール.jpeg"
+       alt="SHIN-CHAN">
+</section>
+
+<section class="card">
+  <h2>Support CRAZY MUSHROOM</h2>
+  <p>応援・寄付はこちらから</p>
+  <p>Thank you for your support!</p>
+</section>
+
+<section class="card">
+  <h2>⚡ Lightning</h2>
+  <p class="address" id="lightning">insidebedroom05@walletofsatoshi.com</p>
+  <button class="button" onclick="copyAddress('lightning')">
+    Copy Lightning Address
+  </button>
+  <img class="qr"
+       src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=insidebedroom05%40walletofsatoshi.com"
+       alt="Lightning QR">
+</section>
+
+<section class="card">
+  <h2>Bitcoin (BTC)</h2>
+  <p class="address" id="bitcoin">bc1qg7h2pzm7848vu7ff6l8cvhmrnysug8tnd4lhee</p>
+  <button class="button" onclick="copyAddress('bitcoin')">
+    Copy Bitcoin Address
+  </button>
+  <img class="qr"
+       src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=bitcoin%3Abc1qg7h2pzm7848vu7ff6l8cvhmrnysug8tnd4lhee"
+       alt="Bitcoin QR">
+</section>
+
+<section class="card">
+  <h2>PayPal</h2>
+  <p>PayPalで応援する / Support via PayPal</p>
+  <a class="button"
+     href="https://paypal.me/s300h150"
+     target="_blank"
+     rel="noopener noreferrer">
+    Donate with PayPal
+  </a>
+</section>
+
+</main>
+
+<script>
+async function copyAddress(id) {
+  const address = document.getElementById(id).textContent.trim();
+  try {
+    await navigator.clipboard.writeText(address);
+    alert("Copied! / コピーしました");
+  } catch (error) {
+    prompt("このアドレスをコピーしてください", address);
+  }
+}
+</script>
+</body>
+</html>
