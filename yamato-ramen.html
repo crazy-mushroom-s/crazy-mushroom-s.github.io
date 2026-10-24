@@ -1,43 +1,34 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>大和市ナイトスポット TOP30</title><meta name="description" content="神奈川県大和市のスナック・キャバクラ・ガールズバーを星評価順で探せる地域ガイド。"><style>
-:root{color-scheme:dark;--gold:#f1ce82}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#352047,#100f19 65%);color:#f9f6fb;font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN',sans-serif}.wrap{max-width:950px;margin:auto;padding:24px 15px 60px}header{text-align:center;padding:36px 5px}h1{font-size:clamp(29px,6vw,50px);margin:12px 0;color:var(--gold)}.sub{color:#cbbbd5}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.controls>*{flex:1;min-width:135px;background:#241c31;border:1px solid #735b82;color:white;padding:13px;border-radius:12px;font-size:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{background:#201a2a;border:1px solid #4b395b;border-radius:17px;overflow:hidden}.card.top{grid-column:1/-1;border:2px solid #caa75c;box-shadow:0 0 20px #d8aa4820}.photo{height:125px;background:linear-gradient(135deg,#4b345e,#1b1524);display:flex;align-items:center;justify-content:center;color:#cbb9d6}.top .photo{height:160px}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:12px 14px}.rank{color:var(--gold);font-weight:800;font-size:18px}.top .rank{font-size:23px}h2{font-size:18px;margin:5px 0}.top h2{font-size:23px}.meta{font-size:13px;color:#c9bed0;margin:4px 0}.stars{color:#ffd27b;font-weight:700}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.actions a,.share a{background:#4e325f;color:white;padding:10px 12px;border-radius:10px;text-decoration:none;font-size:13px;display:inline-block}.actions a:first-child{background:#77552d}.share{text-align:center;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.notice{font-size:12px;line-height:1.8;color:#c6b8ca;margin:18px 0}footer{text-align:center;margin-top:30px;color:#b6a9be;font-size:12px}@media(max-width:540px){.grid{grid-template-columns:1fr}.card.top .photo{height:145px}}
-</style></head><body><main class="wrap"><header><div>YAMATO NIGHT GUIDE</div><h1>大和市 ナイトスポット TOP30</h1><p class="sub">スナック・キャバクラ・ガールズバーを探す</p></header><div class="controls"><input id="search" placeholder="店名・住所で検索"><select id="genre"><option value="">全ジャンル</option><option>スナック</option><option>キャバクラ</option><option>ガールズバー</option></select><select id="area"><option value="">全エリア</option><option>大和</option><option>南林間</option><option>鶴間</option><option>中央林間</option><option>相模大塚</option></select></div><p class="notice">※Googleマップ掲載情報などを参考にした暫定版。評価・件数は確認時点の参考値であり、変動します。評価確認済み店舗を星評価の高い順、同点は口コミ件数の多い順に表示。評価未確認の店舗は後ろに掲載。掲載順はGoogle公式ランキングではありません。営業状況・料金は来店前にご確認ください。写真は使用許可を得た画像のみ登録してください。</p><div class="grid" id="list"></div><p id="empty" hidden>該当する店舗がありません。</p><div class="share"><a id="xshare" target="_blank" rel="noopener">Xで共有</a><a id="lineshare" target="_blank" rel="noopener">LINEで共有</a></div><footer>© YAMATO NIGHT GUIDE · 非公式地域情報サイト</footer></main><script>
-// photo: 'images/shop-name.jpg' のように許可を得た画像のパスを設定できます。
-const shops=[
-{name:'MANDARIN（マンダリン）',genre:'キャバクラ',area:'大和',address:'大和市大和南1-2-14 第53東京ビル3F',rating:5.0,count:3},
-{name:'Alice ガールズバー 大和',genre:'ガールズバー',area:'大和',address:'大和市中央4-1-1 18CWビル2F',rating:5.0,count:4},
-{name:'Girls Lounge ti-da',genre:'ガールズバー',area:'大和',address:'大和市中央1-1-11 2F',rating:5.0,count:2},
-{name:'KINGDOM QUEEN',genre:'キャバクラ',area:'大和',address:'大和市大和南1-4-11 三栄ビル5F',rating:5.0,count:1},
-{name:'snack＆bar Pluma',genre:'スナック',area:'大和',address:'大和市中央3-4-26',rating:4.9,count:20},
-{name:'カラオケスナック江南',genre:'スナック',area:'大和',address:'大和市大和東2-4-16',rating:4.9,count:11},
-{name:'ガールズスナック 入りやすいスナック 大和',genre:'スナック',area:'大和',address:'大和市大和東1-7-24 プリムローズ大和館5F',rating:4.8,count:4},
-{name:'大和スナック New Club Roman',genre:'スナック',area:'大和',address:'大和市中央2-4-5 アルカサーノ大和',rating:4.8,count:4},
-{name:'Glanz グランツ',genre:'スナック',area:'大和',address:'大和市大和南1-3-9 スズビル',rating:4.7,count:37},
-{name:'スナック・オーロラ',genre:'スナック',area:'大和',address:'大和市中央1-3-3 大和ビル114',rating:4.5,count:13},
-{name:'Girls Bar Flower',genre:'ガールズバー',area:'大和',address:'大和市大和南1-4-15',rating:4.5,count:2},
-{name:'スナック ウインク',genre:'スナック',area:'大和',address:'大和市中央2-1-10',rating:4.4,count:24},
-{name:'スナック TOBARI',genre:'スナック',area:'大和',address:'大和市中央2-1-10 2F',rating:4.3,count:27},
-{name:'スナック あいのり',genre:'スナック',area:'大和',address:'大和市中央1-3-3 大和ビル1F',rating:4.2,count:27},
-{name:'ガールズバービジュー',genre:'ガールズバー',area:'大和',address:'大和市大和東1-2-8 小笠原ビル2F',rating:4.2,count:24},
-{name:'Girls Bar honey',genre:'ガールズバー',area:'大和',address:'大和市大和南1-2-13 第53東京ビル4F',rating:4.2,count:15},
-{name:'BIGBANG 大和店',genre:'ガールズバー',area:'大和',address:'大和市大和東1-4-5 マリナビル3F',rating:4.2,count:9},
-{name:'Girls bar Session',genre:'ガールズバー',area:'大和',address:'大和市大和南2-1-5 加瀬ビル187 4F',rating:4.0,count:14},
-{name:'Club FORT',genre:'キャバクラ',area:'大和',address:'大和市大和南1-5-17 中村ビル2F'},
-{name:'The sea',genre:'キャバクラ',area:'大和',address:'大和市中央1-1-11 清南ビル4F'},
-{name:'CLUB L’GE',genre:'キャバクラ',area:'大和',address:'大和市中央1-1-7 FCC大和ビル2F'},
-{name:'THE 美々',genre:'キャバクラ',area:'大和',address:'大和市大和南2-1-5 加瀬ビル187 2F'},
-{name:'La Vie en Rose',genre:'キャバクラ',area:'大和',address:'大和市大和東2-2-3 ライオンズビル大和1F'},
-{name:'club Shell',genre:'キャバクラ',area:'大和',address:'大和市中央2-4-4 藤和ビル1F'},
-{name:'Alma',genre:'スナック',area:'大和',address:'大和市大和東1-3-6 トチハラビル2F'},
-{name:'SNACK.M',genre:'スナック',area:'中央林間',address:'大和市中央林間3-13-17'},
-{name:'Oasis',genre:'スナック',area:'大和',address:'大和市中央4-1-18'},
-{name:'パブラウンジ Leap',genre:'スナック',area:'南林間',address:'大和市南林間2-1-7'},
-{name:'nuts',genre:'ガールズバー',area:'南林間',address:'大和市南林間2-8-20'},
-{name:'PURE',genre:'ガールズバー',area:'鶴間',address:'大和市西鶴間1-13-13 長谷ビル'}
-];
-shops.forEach(s=>{s.photo=''});
-shops.sort((a,b)=>(b.rating??-1)-(a.rating??-1)||(b.count??-1)-(a.count??-1)||a.name.localeCompare(b.name,'ja'));
-const el=document.getElementById('list');const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(){let q=document.getElementById('search').value.toLowerCase(),g=document.getElementById('genre').value,a=document.getElementById('area').value;let rows=shops.map((s,i)=>({...s,rank:i+1})).filter(s=>(!g||s.genre===g)&&(!a||s.area===a)&&(!q||(s.name+s.address).toLowerCase().includes(q)));el.innerHTML=rows.map(s=>{let maps='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.name+' '+s.address);return `<article class="card ${s.rank<=5?'top':''}">${s.photo?`<div class="photo"><img loading="lazy" src="${esc(s.photo)}" alt="${esc(s.name)}"></div>`:''}<div class="info"><div class="rank">${s.rank<=5?'★ ':''}No.${s.rank}</div><h2>${esc(s.name)}</h2><div class="stars">${s.rating!=null?'★ '+s.rating.toFixed(1)+'（口コミ'+s.count+'件）':'Google評価 未確認'}</div><div class="meta">${esc(s.genre)} / ${esc(s.area)}</div><div class="meta">${esc(s.address)}</div><div class="actions"><a href="${maps}" target="_blank" rel="noopener">Googleマップ・口コミ</a></div></div></article>`}).join('');document.getElementById('empty').hidden=rows.length>0}
-['search','genre','area'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',render));let share=encodeURIComponent(location.href),title=encodeURIComponent('大和市ナイトスポット TOP30');document.getElementById('xshare').href='https://twitter.com/intent/tweet?text='+title+'&url='+share;document.getElementById('lineshare').href='https://social-plugins.line.me/lineit/share?url='+share;render();
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本日の人気動画 TOP5 | Daily TOP5</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101014;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}main{max-width:580px;margin:auto;padding:22px 16px 60px}header{text-align:center;padding:24px 0}h1{font-size:28px;margin:0 0 8px}.orange{color:#ff9900}.sub{color:#aeb0bb;font-size:13px}#status{text-align:center;font-size:13px;color:#bfc0ca;margin:14px 0 20px}.item{background:#1d1d23;border:1px solid #34343b;border-radius:16px;overflow:hidden;margin:14px 0}.thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#2c2c33}.info{padding:14px}.rank{font-weight:800;color:#ffae38}.name{font-size:16px;font-weight:700;margin:8px 0;overflow-wrap:anywhere}.meta{font-size:12px;color:#b4b4bd}.btns{display:flex;gap:8px;margin-top:13px}.btn{border:0;border-radius:9px;padding:11px 12px;background:#ff9900;color:#141414;font-weight:700;text-decoration:none;flex:1;text-align:center;font-size:13px}.btn.secondary{background:#33333c;color:white}footer{text-align:center;font-size:12px;color:#a4a4ae;line-height:1.7;margin-top:30px}a{color:inherit}.hidden{display:none}
+</style>
+</head>
+<body><main>
+<header><div class="sub">18+ | ADULT VIDEO RANKING</div><h1>本日の人気動画 <span class="orange">TOP5</span></h1><div class="sub">Daily Most Viewed · 更新時刻はデータ取得時に表示</div></header>
+<div id="status">ランキングデータを確認しています…</div>
+<div id="list"></div>
+<footer>18歳未満の方は閲覧しないでください。<br>当サイトは動画を保存・配信しません。外部リンク先の利用条件をご確認ください。<br>データの取得元・集計条件により順位が変わる場合があります。</footer>
+</main>
+<script>
+// data/top5.json は GitHub Actions 等で毎日更新する想定。
+// GitHub Pages単体ではPornhubのランキングを自動取得できません。
+// 実際のデータが取得できるまでは架空の順位やサムネイルを表示しません。
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>{try{const x=new URL(u);return x.protocol==='https:'?x.href:''}catch{return ''}};
+async function load(){try{
+const res=await fetch('./data/top5.json?v='+Date.now(),{cache:'no-store'});
+if(!res.ok)throw Error('データ未登録');
+const d=await res.json();if(!Array.isArray(d.videos)||!d.videos.length)throw Error('ランキング未取得');
+$('status').textContent=`${d.updated_at||'更新日時不明'} 更新 / ${d.period||'本日'} / ${d.source||'取得元未設定'}`;
+$('list').innerHTML=d.videos.slice(0,5).map((v,i)=>{
+const url=safeUrl(v.url),img=safeUrl(v.thumbnail);
+return `<article class="item">${img?`<img class="thumb" src="${esc(img)}" alt="動画サムネイル" loading="lazy" referrerpolicy="no-referrer">`:`<div class="thumb" style="display:grid;place-items:center;color:#aaa">サムネイルなし</div>`}<div class="info"><div class="rank">${['🥇','🥈','🥉','4位','5位'][i]} ${i<3?'第'+(i+1)+'位':''}</div><div class="name">${esc(v.title||'タイトル未取得')}</div><div class="meta">${v.views!=null?'再生回数 '+Number(v.views).toLocaleString('ja-JP')+' 回':''}</div><div class="btns">${url?`<a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">動画を見る ↗</a>`:''}<button class="btn secondary" data-share="${i}">共有</button></div></div></article>`}).join('');
+$('list').querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>{const v=d.videos[Number(b.dataset.share)];const u=safeUrl(v.url);if(navigator.share)navigator.share({title:v.title,url:u||location.href}).catch(()=>{});else window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(v.title)+'&url='+encodeURIComponent(u||location.href),'_blank','noopener')}));
+}catch(e){$('status').textContent='現在、実際のランキングデータは未取得です。';$('list').innerHTML='<div class="item"><div class="info">このページは表示テスト用です。毎日のTOP5を表示するには、データ取得用のGitHub Actionsと data/top5.json の設定が必要です。架空の順位は掲載していません。</div></div>'}}
+load();
 </script></body></html>
