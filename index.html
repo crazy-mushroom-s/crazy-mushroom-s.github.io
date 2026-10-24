@@ -1,147 +1,111 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRAZY MUSHROOM</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>クレイジー恋愛診断 | Crazy Love Test</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: #101521;
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-main {
-  width: 92%;
-  max-width: 600px;
-  margin: auto;
-  padding: 30px 0 60px;
-}
-h1 {
-  color: #f5bd4c;
-  font-size: clamp(28px, 8vw, 44px);
-}
-.card {
-  width: 100%;
-  background: #222d43;
-  padding: 25px;
-  margin: 25px 0;
-  border-radius: 25px;
-}
-.profile {
-  width: 100%;
-  display: block;
-  border-radius: 18px;
-}
-h2 { color: #f5bd4c; }
-p { line-height: 1.7; }
-.address {
-  overflow-wrap: anywhere;
-  font-size: 13px;
-}
-.button {
-  display: block;
-  width: 100%;
-  padding: 17px 10px;
-  margin: 15px 0;
-  background: #f5bd4c;
-  color: #172033;
-  border: 0;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-.qr {
-  width: 200px;
-  max-width: 100%;
-  padding: 8px;
-  background: white;
-  border-radius: 10px;
-  margin-top: 12px;
-}
-</style>
-</head>
+:root{color-scheme:dark;--hot:#ff3c99;--pink:#ff91c6}*{box-sizing:border-box}
+body{margin:0;min-height:100svh;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:#fff;background:radial-gradient(circle at 50% 0%,#8d165d 0%,#370c2d 46%,#140713 100%);overflow-x:hidden}
+.wrap{max-width:500px;margin:auto;padding:40px 20px 70px;text-align:center}h1{position:relative;top:25px;font-size:clamp(28px,7vw,39px);margin:15px 0 40px;color:#ffd4e9;text-shadow:0 0 20px #fa2687}.panel{margin-top:40px;background:linear-gradient(145deg,#5d1648db,#290d29ee);border:1px solid #f765aa88;box-shadow:0 14px 55px #10010f99,inset 0 0 22px #ff4ca318;border-radius:28px;padding:24px 20px}.modes{display:flex;gap:8px;margin-bottom:25px}.mode{flex:1;border:1px solid #ff82ba;background:#421134;color:#ffd5e8;border-radius:14px;padding:13px 5px;font-size:13px;font-weight:700;cursor:pointer}.mode.active{background:linear-gradient(135deg,#ff4fa4,#e31770);border-color:#ffb2d5;box-shadow:0 0 18px #ff4a9b88}.field{text-align:left;margin:18px 0}.field label{display:block;color:#ffd2e7;font-weight:700;font-size:14px;margin-bottom:8px}.field small{font-size:12px;color:#ffa6cc;font-weight:400}.field input{width:100%;font-size:17px;padding:15px;border-radius:13px;border:1px solid #ff83b8;background:#1e0b20;color:white;outline:none}.field input:focus{border-color:#fff;box-shadow:0 0 0 3px #fa46985c}button.go{width:100%;margin-top:16px;padding:17px 10px;border:0;border-radius:18px;color:white;font-size:18px;font-weight:800;background:linear-gradient(100deg,#ff60ae,#f31d83,#e0106d);box-shadow:0 8px 28px #fb167b77;cursor:pointer}.go:active{transform:scale(.98)}.en{display:block;font-size:12px;font-weight:500;margin-top:5px}.result{display:none;margin-top:25px;padding:20px 10px;border:1px solid #ff8fc2;border-radius:22px;background:#240c23}.result.show{display:block;animation:pop .4s ease}.result .label{color:#ffbbd9;font-size:15px}.percent{font-size:clamp(75px,20vw,112px);font-weight:900;line-height:1.2;color:#ff66ad;text-shadow:0 0 16px #ff2b91,0 0 40px #ff2b9166}.again{margin-top:10px;background:transparent;border:1px solid #ff86bb;border-radius:13px;color:#ffd0e6;padding:11px 23px;font-size:14px;cursor:pointer}.future{margin:22px 0 12px;padding:19px 14px;background:#59153e;border:1px solid #f779b2;border-radius:20px}.future .head{color:#ffb6d9;font-size:20px;font-weight:800}.future .forecast{line-height:1.7;margin:17px auto;font-size:16px}.future .forecast-en{line-height:1.55;font-size:13px;color:#f8bad7;margin-top:10px}.smallbtn{width:100%;padding:14px 10px;border:0;border-radius:14px;background:linear-gradient(90deg,#ff4ca0,#e90072);color:white;font-weight:800;cursor:pointer}.share{margin-top:20px}.sharehead{color:#ffe0ef;font-weight:bold;margin-bottom:12px}.sharegrid{display:flex;gap:10px}.sharegrid button{flex:1;background:#66143f;color:white;border:1px solid #f779b2;border-radius:14px;padding:14px 5px;cursor:pointer}.share .smallbtn{margin-top:10px}.foot{margin-top:27px;font-size:23px;letter-spacing:8px;color:#ff9fca}.heart{position:fixed;top:-50px;pointer-events:none;z-index:9;animation:fall linear forwards;text-shadow:0 0 12px #ff70ae}@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(550deg);opacity:0}}@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}#admin{display:none;margin-top:20px;padding:12px;background:#170b18;border:1px solid #a65c85;border-radius:12px;font-size:12px;color:#ffb6d8}#admin.show{display:block}#admin button{padding:8px 15px;border:1px solid #ff8dc1;background:#4b1740;color:white;border-radius:8px;margin-top:8px}.legal{font-size:11px;color:#ecb4ce;margin:15px auto 0}
+</style></head>
 <body>
-<main>
-
-<h1>CRAZY MUSHROOM</h1>
-
-<section class="card">
-  <img class="profile" src="profile.jpg" alt="SHIN-CHAN">
+<main class="wrap">
+<h1 id="title">Crazy Love Test 💋</h1>
+<section class="panel">
+  <div class="modes"><button type="button" class="mode active" data-mode="love">💕 恋愛相性<span class="en">Love Compatibility</span></button><button type="button" class="mode" data-mode="sex">💋 SEX相性<span class="en">Sexual Compatibility</span></button></div>
+  <form id="form">
+    <div class="field"><label for="name1">あなたの名前 <small>/ Your Name</small></label><input id="name1" maxlength="40" autocomplete="off" placeholder="名前を入力 / Enter your name" required oninvalid="this.setCustomValidity('No name, no love drama! 💋')" oninput="this.setCustomValidity('')"></div>
+    <div class="field"><label for="name2">相手の名前 <small>/ Partner's Name</small></label><input id="name2" maxlength="40" autocomplete="off" placeholder="名前を入力 / Enter their name" required oninvalid="this.setCustomValidity('No name, no love drama! 💋')" oninput="this.setCustomValidity('')"></div>
+    <button class="go" type="submit">💗 禁断の相性をチェック 💗<span class="en">Check Your Secret Chemistry</span></button>
+  </form>
+  <div id="result" class="result" aria-live="polite">
+    <div id="resultLabel" class="label">💕 恋愛相性 / Love Compatibility</div>
+    <div id="percent" class="percent">98%</div>
+    <button class="again" id="again" type="button">もう一度診断 / Try Again ↻</button>
+    <div class="share" id="shareButtons">
+      <div class="sharehead">💕 診断結果をシェア 💕<small class="en">Share Your Result</small></div>
+      <div class="sharegrid"><button type="button" data-share="x">𝕏 Xで共有</button><button type="button" data-share="line">LINEで共有</button></div>
+      <button class="smallbtn" type="button" data-share="other">♡ その他のアプリで共有</button>
+    </div>
+    <div class="legal">※エンターテインメント用の診断です / For entertainment only</div>
+  </div>
 </section>
-<section class="card" style="text-align:center;">
-  <h2>❤️ CRAZY LOVE TEST ❤️</h2>
-  <p>How crazy is your love?</p>
+<div class="foot"></div>
+<div id="admin">🔒 管理用設定 / Private Settings<br><span id="status"></span><br><button id="toggle" type="button">切り替え / Toggle</button><br><small>この設定はこの端末だけに保存されます。コードを調べると仕組みは分かります。</small></div>
 
-  <a href="https://crazy-love-test.github.io/"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="display:inline-block;
-            background:#f5bc50;
-            color:#171d2a;
-            padding:15px 25px;
-            border-radius:12px;
-            font-weight:bold;
-            text-decoration:none;">
-    TAKE THE LOVE TEST →
+<!-- 現在のアクセスカウンターと既存アフィリエイト広告を維持 -->
+<div style="text-align:center; margin:25px 0;">
+  <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fcrazy-love-test.github.io%2F&amp;label=VISITORS&amp;icon=github&amp;color=%23000&amp;message=&amp;style=flat&amp;tz=UTC" alt="Visitors counter">
+  <a href="https://550909.com/?f2927217" target="_blank" rel="nofollow sponsored noopener noreferrer">
+    <img src="IMG_1714.jpeg" alt="PR マッチングサービス" style="width:100%;max-width:640px;height:auto;">
   </a>
-</section>
-<section class="card">
-  <h2>Support CRAZY MUSHROOM</h2>
-  <p>応援・寄付はこちらから</p>
-  <p>Thank you for your support!</p>
-</section>
-
-<section class="card">
-  <h2>⚡ Lightning</h2>
-  <p class="address" id="lightning">insidebedroom05@walletofsatoshi.com</p>
-  <button class="button" onclick="copyAddress('lightning')">
-    Copy Lightning Address
-  </button>
-  <img class="qr"
-       src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=insidebedroom05%40walletofsatoshi.com"
-       alt="Lightning QR">
-</section>
-
-<section class="card">
-  <h2>Bitcoin (BTC)</h2>
-  <p class="address" id="bitcoin">bc1qg7h2pzm7848vu7ff6l8cvhmrnysug8tnd4lhee</p>
-  <button class="button" onclick="copyAddress('bitcoin')">
-    Copy Bitcoin Address
-  </button>
-  <img class="qr"
-       src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&amp;data=bitcoin%3Abc1qg7h2pzm7848vu7ff6l8cvhmrnysug8tnd4lhee"
-       alt="Bitcoin QR">
-</section>
-
-<section class="card">
-  <h2>PayPal</h2>
-  <p>PayPalで応援する / Support via PayPal</p>
-  <a class="button"
-     href="https://paypal.me/s300h150"
-     target="_blank"
-     rel="noopener noreferrer">
-    Donate with PayPal
-  </a>
-</section>
-
+</div>
 </main>
-
 <script>
-async function copyAddress(id) {
-  const address = document.getElementById(id).textContent.trim();
-  try {
-    await navigator.clipboard.writeText(address);
-    alert("Copied! / コピーしました");
-  } catch (error) {
-    prompt("このアドレスをコピーしてください", address);
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  let mode = 'love';
+  let currentPct = null;
+  let special = localStorage.getItem('crazy-love-special') !== 'off';
+  document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll('.mode').forEach(x => x.classList.toggle('active', x === b));
+    $('result').classList.remove('show'); currentPct = null;
+  }));
+  function hearts(){
+    const icons=['💗','💕','💖','💘','❤️‍🔥','💋'];
+    for(let i=0;i<95;i++){
+      const h=document.createElement('span'); h.className='heart';
+      h.textContent=icons[Math.floor(Math.random()*icons.length)];
+      h.style.left=Math.random()*100+'vw';
+      h.style.fontSize=(14+Math.random()*28)+'px';
+      h.style.animationDuration=(2.5+Math.random()*3.5)+'s';
+      h.style.animationDelay=(Math.random()*2)+'s';
+      h.style.setProperty('--drift',(Math.random()*200-100)+'px');
+      document.body.append(h); setTimeout(()=>h.remove(),6500);
+    }
   }
-}
+  function diagnose(){
+    const a=$('name1').value.trim(), b=$('name2').value.trim();
+    if(!a||!b){$('form').reportValidity();return;}
+    const isShin=a==='しんちゃん'||b==='しんちゃん';
+    const pct=special && isShin ? 100 : Math.floor(Math.random()*101);
+    currentPct = pct;
+    $('resultLabel').textContent=mode==='love'?'💕 恋愛相性 / Love Compatibility':'💋 SEX相性 / Sexual Compatibility';
+    $('percent').textContent=pct+'%';
+    $('result').classList.remove('show'); void $('result').offsetWidth;
+    $('result').classList.add('show');
+    hearts();
+  }
+  $('form').addEventListener('submit',e=>{e.preventDefault();diagnose();});
+  $('again').addEventListener('click',diagnose);
+  async function shareLove(type){
+    if(currentPct===null)return;
+    const label=$('resultLabel').textContent.trim();
+    const url='https://crazy-love-test.github.io/';
+    const message=`💕 Crazy Love Test 💋\n${label}: ${currentPct}%\n${url}`;
+    if(type==='x'){
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(message),'_blank','noopener');
+    }else if(type==='line'){
+      window.open('https://line.me/R/msg/text/?'+encodeURIComponent(message),'_blank','noopener');
+    }else if(navigator.share){
+      try{await navigator.share({title:'Crazy Love Test 💋',text:message,url});}
+      catch(e){if(e.name!=='AbortError')alert('共有できませんでした / Could not share');}
+    }else{
+      try{await navigator.clipboard.writeText(message);alert('診断結果をコピーしました！');}
+      catch(e){prompt('診断結果をコピーしてください',message);}
+    }
+  }
+  document.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>shareLove(b.dataset.share)));
+  let taps=0,last=0;
+  $('title').addEventListener('click',()=>{
+    if(Date.now()-last>2500)taps=0; last=Date.now();
+    if(++taps>=7){$('admin').classList.toggle('show');taps=0;update();}
+  });
+  function update(){$('status').textContent='しんちゃん100%: '+(special?'ON':'OFF');}
+  $('toggle').addEventListener('click',()=>{
+    special=!special;localStorage.setItem('crazy-love-special',special?'on':'off');update();
+  });
+})();
 </script>
 </body>
 </html>
