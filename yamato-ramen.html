@@ -1,34 +1,26 @@
 <!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>本日の人気動画 TOP5 | Daily TOP5</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pornhub 今日の人気 TOP5</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101014;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}main{max-width:580px;margin:auto;padding:22px 16px 60px}header{text-align:center;padding:24px 0}h1{font-size:28px;margin:0 0 8px}.orange{color:#ff9900}.sub{color:#aeb0bb;font-size:13px}#status{text-align:center;font-size:13px;color:#bfc0ca;margin:14px 0 20px}.item{background:#1d1d23;border:1px solid #34343b;border-radius:16px;overflow:hidden;margin:14px 0}.thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#2c2c33}.info{padding:14px}.rank{font-weight:800;color:#ffae38}.name{font-size:16px;font-weight:700;margin:8px 0;overflow-wrap:anywhere}.meta{font-size:12px;color:#b4b4bd}.btns{display:flex;gap:8px;margin-top:13px}.btn{border:0;border-radius:9px;padding:11px 12px;background:#ff9900;color:#141414;font-weight:700;text-decoration:none;flex:1;text-align:center;font-size:13px}.btn.secondary{background:#33333c;color:white}footer{text-align:center;font-size:12px;color:#a4a4ae;line-height:1.7;margin-top:30px}a{color:inherit}.hidden{display:none}
-</style>
-</head>
-<body><main>
-<header><div class="sub">18+ | ADULT VIDEO RANKING</div><h1>本日の人気動画 <span class="orange">TOP5</span></h1><div class="sub">Daily Most Viewed · 更新時刻はデータ取得時に表示</div></header>
-<div id="status">ランキングデータを確認しています…</div>
-<div id="list"></div>
-<footer>18歳未満の方は閲覧しないでください。<br>当サイトは動画を保存・配信しません。外部リンク先の利用条件をご確認ください。<br>データの取得元・集計条件により順位が変わる場合があります。</footer>
-</main>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101010;color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif}.wrap{max-width:620px;margin:auto;padding:22px 15px 55px}header{text-align:center;margin:16px 0 26px}.brand{font-size:31px;font-weight:900;letter-spacing:-1px}.brand span{background:#ff9000;color:#141414;padding:3px 9px;border-radius:7px}h1{font-size:22px;margin:17px 0 5px}.muted{color:#a6a6a6;font-size:12px}.item{background:#1c1c1c;border:1px solid #333;border-radius:15px;overflow:hidden;margin-bottom:15px}.item.first{border-color:#ff9900}.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#282828;display:block}.fallback{aspect-ratio:16/9;display:grid;place-items:center;background:linear-gradient(140deg,#343434,#181818);color:#777;font-size:15px}.body{padding:14px}.rank{color:#ff9900;font-weight:900;font-size:15px}.first .rank{font-size:19px}.video-title{font-size:17px;font-weight:700;margin:7px 0 13px;overflow-wrap:anywhere}.first .video-title{font-size:20px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:700;text-decoration:none;background:#ff9900;color:#111;cursor:pointer;font-size:13px}.btn.secondary{background:#343434;color:#fff}.btn:disabled{opacity:.4;cursor:not-allowed}.toolbar{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:20px 0}dialog{background:#202020;color:#fff;border:1px solid #555;border-radius:16px;width:min(94vw,520px);max-height:90vh;overflow:auto;padding:20px}dialog::backdrop{background:#000b}label{display:block;font-size:13px;color:#ccc;margin:12px 0 5px}input{width:100%;padding:12px;border-radius:8px;border:1px solid #555;background:#111;color:#fff;font-size:16px}.edit-row{border-bottom:1px solid #444;padding-bottom:15px;margin-bottom:15px}.note{font-size:12px;color:#aaa;line-height:1.7;margin-top:22px}footer{text-align:center;color:#777;font-size:11px;margin-top:25px}
+</style></head><body><main class="wrap"><header><div class="brand">Porn<span>hub</span></div><h1>本日の人気動画 TOP5</h1><div class="muted" id="date"></div><div class="muted">サンプル画像入りデモ（実際の人気順位ではありません）</div></header><div id="ranking"></div><div class="toolbar"><button class="btn" id="edit">✎ TOP5を編集</button><button class="btn secondary" id="shareX">X共有</button><button class="btn secondary" id="shareLine">LINE共有</button></div><p class="note">※ 現在の画像はPicsum Photosのデモ用写真で、Pornhubの動画サムネイルではありません。実際の動画URLと画像URLは「TOP5を編集」から設定できます。<br>※ 成人向けサイトへのリンクがあります（18歳未満は利用しないでください）。動画とサムネイルの権利・外部掲載条件を確認してください。<br>※ 編集内容はこのブラウザにだけ保存されます。GitHub Pagesの全訪問者に反映するには、編集後に「公開用データをコピー」してHTML内の defaultVideos を書き換える必要があります。サムネイルURLは有効期限や外部参照制限で表示できない場合があります。</p><footer>Unofficial fan ranking · Not affiliated with Pornhub</footer></main>
+<dialog id="editor"><h2>TOP5を編集</h2><p class="muted">タイトル・動画URL・画像URLを入力。サムネイルは画像URLが必要です。</p><div id="fields"></div><div class="actions"><button class="btn" id="save">保存して表示</button><button class="btn secondary" id="copy">公開用データをコピー</button><button class="btn secondary" id="close">閉じる</button></div></dialog>
 <script>
-// data/top5.json は GitHub Actions 等で毎日更新する想定。
-// GitHub Pages単体ではPornhubのランキングを自動取得できません。
-// 実際のデータが取得できるまでは架空の順位やサムネイルを表示しません。
+// 公開時に表示する動画データ。ここを手動で書き換えてGitHubにコミットしてください。
+const defaultVideos=[
+ {title:'サンプル動画 01（仮表示）',url:'',image:'https://picsum.photos/seed/neon-stage-01/960/540'},
+ {title:'サンプル動画 02（仮表示）',url:'',image:'https://picsum.photos/seed/neon-stage-02/960/540'},
+ {title:'サンプル動画 03（仮表示）',url:'',image:'https://picsum.photos/seed/neon-stage-03/960/540'},
+ {title:'サンプル動画 04（仮表示）',url:'',image:'https://picsum.photos/seed/neon-stage-04/960/540'},
+ {title:'サンプル動画 05（仮表示）',url:'',image:'https://picsum.photos/seed/neon-stage-05/960/540'}
+];
 const $=id=>document.getElementById(id);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const safeUrl=u=>{try{const x=new URL(u);return x.protocol==='https:'?x.href:''}catch{return ''}};
-async function load(){try{
-const res=await fetch('./data/top5.json?v='+Date.now(),{cache:'no-store'});
-if(!res.ok)throw Error('データ未登録');
-const d=await res.json();if(!Array.isArray(d.videos)||!d.videos.length)throw Error('ランキング未取得');
-$('status').textContent=`${d.updated_at||'更新日時不明'} 更新 / ${d.period||'本日'} / ${d.source||'取得元未設定'}`;
-$('list').innerHTML=d.videos.slice(0,5).map((v,i)=>{
-const url=safeUrl(v.url),img=safeUrl(v.thumbnail);
-return `<article class="item">${img?`<img class="thumb" src="${esc(img)}" alt="動画サムネイル" loading="lazy" referrerpolicy="no-referrer">`:`<div class="thumb" style="display:grid;place-items:center;color:#aaa">サムネイルなし</div>`}<div class="info"><div class="rank">${['🥇','🥈','🥉','4位','5位'][i]} ${i<3?'第'+(i+1)+'位':''}</div><div class="name">${esc(v.title||'タイトル未取得')}</div><div class="meta">${v.views!=null?'再生回数 '+Number(v.views).toLocaleString('ja-JP')+' 回':''}</div><div class="btns">${url?`<a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">動画を見る ↗</a>`:''}<button class="btn secondary" data-share="${i}">共有</button></div></div></article>`}).join('');
-$('list').querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',()=>{const v=d.videos[Number(b.dataset.share)];const u=safeUrl(v.url);if(navigator.share)navigator.share({title:v.title,url:u||location.href}).catch(()=>{});else window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(v.title)+'&url='+encodeURIComponent(u||location.href),'_blank','noopener')}));
-}catch(e){$('status').textContent='現在、実際のランキングデータは未取得です。';$('list').innerHTML='<div class="item"><div class="info">このページは表示テスト用です。毎日のTOP5を表示するには、データ取得用のGitHub Actionsと data/top5.json の設定が必要です。架空の順位は掲載していません。</div></div>'}}
-load();
+let videos;try{videos=JSON.parse(localStorage.getItem('ph-top5-demo2'))||defaultVideos}catch{videos=defaultVideos}
+const safeUrl=(u)=>{try{const x=new URL(u);return x.protocol==='https:'?x.href:''}catch{return ''}};
+const videoUrl=u=>{const s=safeUrl(u);try{const h=new URL(s).hostname;return h==='pornhub.com'||h.endsWith('.pornhub.com')?s:''}catch{return ''}};
+const make=(tag,cls,txt)=>{let e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
+function render(){const root=$('ranking');root.replaceChildren();videos.forEach((v,i)=>{let card=make('article','item'+(i===0?' first':''));const imgUrl=safeUrl(v.image);if(imgUrl){const img=make('img','thumb');img.src=imgUrl;img.alt='第'+(i+1)+'位のサムネイル';img.loading='lazy';img.onerror=()=>img.replaceWith(make('div','fallback','サムネイルを表示できません'));card.append(img)}else card.append(make('div','fallback','サムネイル未登録'));const b=make('div','body');b.append(make('div','rank',['🥇 第1位','🥈 第2位','🥉 第3位','第4位','第5位'][i]));b.append(make('div','video-title',v.title||'動画未登録'));let actions=make('div','actions');let a=make('a','btn','動画を見る ↗');const link=videoUrl(v.url);if(link){a.href=link;a.target='_blank';a.rel='noopener noreferrer'}else{a.removeAttribute('href');a.style.opacity='.45'}actions.append(a);b.append(actions);card.append(b);root.append(card)})}
+function fields(){const box=$('fields');box.replaceChildren();videos.forEach((v,i)=>{let section=make('div','edit-row');section.append(make('strong','',`第${i+1}位`));for(const [key,label] of [['title','動画タイトル'],['url','Pornhub動画URL'],['image','サムネイル画像URL']]){let l=make('label','',label),input=make('input');input.value=v[key]||'';input.dataset.i=i;input.dataset.key=key;input.placeholder=label;section.append(l,input)}box.append(section)})}
+function collect(){const next=Array.from({length:5},()=>({title:'',url:'',image:''}));$('fields').querySelectorAll('input').forEach(input=>next[Number(input.dataset.i)][input.dataset.key]=input.value.trim());return next}
+$('edit').onclick=()=>{fields();$('editor').showModal()};$('close').onclick=()=>$('editor').close();$('save').onclick=()=>{videos=collect();localStorage.setItem('ph-top5-demo2',JSON.stringify(videos));render();$('editor').close()};$('copy').onclick=async()=>{const data=JSON.stringify(collect(),null,2);try{await navigator.clipboard.writeText('const defaultVideos='+data+';');alert('公開用データをコピーしました。HTMLの defaultVideos の定義と置き換えてください。')}catch{alert('コピーできませんでした。HTTPSで開いてください。')}};
+const page=()=>location.href.split('#')[0];$('shareX').onclick=()=>window.open('https://twitter.com/intent/tweet?'+new URLSearchParams({text:'本日の人気動画 TOP5',url:page()}),'_blank','noopener');$('shareLine').onclick=()=>window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(page()),'_blank','noopener');$('date').textContent=new Intl.DateTimeFormat('ja-JP',{year:'numeric',month:'long',day:'numeric',timeZone:'Asia/Tokyo'}).format(new Date());render();
 </script></body></html>
