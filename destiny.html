@@ -14,33 +14,67 @@ function hash(s){let h=2166136261;for(const ch of s)h=Math.imul(h^ch.codePointAt
 function run(which,animate=true){let name=$("name").value.trim();if(!name){$("name").setCustomValidity(en?"Your soul needs a name! 🔮":"名前がないと魂が迷子になるよ！🔮");$("name").reportValidity();$("name").focus();return} $("name").setCustomValidity("");mode=which;let key=name.normalize("NFKC")+"|"+which;let n=hash(key)%100,total=0,cat;for(const c of cats){total+=c[1];if(n<total){cat=c;break}}let items=data[cat[0]],item=items[hash(key+"|item")%items.length],list=en?(which==="past"?enPast:enFuture):(which==="past"?jpPast:jpFuture);let msg=special[item]?special[item][(en?2:0)+(which==="future"?1:0)]:list[hash(key+"|joke")%list.length];$("kind").textContent=(which==="past"?(en?"PAST LIFE":"前世"):(en?"FUTURE LIFE":"来世"))+" · "+(en?cat[4]:cat[3]);$("creature").textContent=cat[2]+" "+item;$("message").textContent=msg;$("result").style.display="block";if(animate){let f=$("flash");f.classList.remove("go");void f.offsetWidth;f.classList.add("go");setTimeout(()=>$("result").scrollIntoView({behavior:"smooth",block:"nearest"}),230)}}
 $("name").addEventListener("input",()=>$("name").setCustomValidity(""));$("past").onclick=()=>run("past");$("future").onclick=()=>run("future");
 $("lang").onclick=()=>{en=!en;document.documentElement.lang=en?"en":"ja";$("lang").textContent=en?"日本語":"English";$("sub").textContent=en?"Where did your soul come from, and where will it go?":"あなたの魂は、どこから来て、どこへ行く？";$("label").textContent=en?"Enter your name":"あなたの名前を入力";$("name").placeholder=en?"Your name":"名前 / Name";$("past").innerHTML=en?"🌙 Past Life<small>PAST LIFE</small>":"🌙 前世を占う<small>PAST LIFE</small>";$("future").innerHTML=en?"☀️ Future Life<small>FUTURE LIFE</small>":"☀️ 来世を占う<small>FUTURE LIFE</small>";$("note").innerHTML=en?"Just for fun. Same name and life type, same result.":"※ジョーク・エンターテインメントです。<br>同じ名前・同じ占いなら結果は変わりません。";if(mode&&$("name").value.trim())run(mode,false)};
+
 </script>
 <script>
-const shareBtn = document.createElement("button");
-shareBtn.textContent = "🔗 結果をシェア";
-shareBtn.style.cssText = "display:none;margin:20px auto;padding:14px 24px;background:#9b6acb;color:white;border:1px solid #d9b96b;border-radius:14px;font-size:16px;cursor:pointer";
-document.getElementById("result").appendChild(shareBtn);
+const shareBox = document.createElement("div");
+shareBox.style.cssText =
+  "display:none;gap:10px;margin-top:20px";
 
-function updateShareButton() {
-  shareBtn.style.display = document.getElementById("result").style.display === "block" ? "block" : "none";
-}
-document.getElementById("past").addEventListener("click", updateShareButton);
-document.getElementById("future").addEventListener("click", updateShareButton);
+shareBox.innerHTML = `
+  <button id="shareX" type="button"
+    style="flex:1;background:#111;color:white">
+    𝕏 Xでシェア
+  </button>
+  <button id="shareLINE" type="button"
+    style="flex:1;background:#06c755;color:white">
+    💚 LINEでシェア
+  </button>
+`;
 
-shareBtn.onclick = async () => {
+document.getElementById("result").appendChild(shareBox);
+
+function getShareText() {
   const kind = document.getElementById("kind").textContent;
   const creature = document.getElementById("creature").textContent;
   const message = document.getElementById("message").textContent;
-  const text = `🔮 SOUL DESTINY\n${kind}\n${creature}\n${message}`;
-  const url = "https://crazy-mushroom-s.github.io/destiny.html";
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: "SOUL DESTINY", text, url });
-    } catch (e) {}
-  } else {
-    await navigator.clipboard.writeText(text + "\n" + url);
-    alert("共有内容をコピーしました！");
+
+  return `🔮 SOUL DESTINY
+${kind}
+${creature}
+${message}`;
+}
+
+const shareURL =
+  "https://crazy-mushroom-s.github.io/destiny.html";
+
+function showShareButtons() {
+  if (document.getElementById("result").style.display === "block") {
+    shareBox.style.display = "flex";
   }
+}
+
+document.getElementById("past")
+  .addEventListener("click", showShareButtons);
+
+document.getElementById("future")
+  .addEventListener("click", showShareButtons);
+
+document.getElementById("shareX").onclick = () => {
+  const url = "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(getShareText()) +
+    "&url=" + encodeURIComponent(shareURL);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
+document.getElementById("shareLINE").onclick = () => {
+  const text = getShareText() + "\n" + shareURL;
+  const url = "https://social-plugins.line.me/lineit/share?url=" +
+    encodeURIComponent(shareURL) +
+    "&text=" + encodeURIComponent(text);
+
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 </script>
 </body>
