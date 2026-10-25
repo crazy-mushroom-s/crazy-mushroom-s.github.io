@@ -67,7 +67,7 @@ body{margin:0;min-height:100svh;font-family:-apple-system,BlinkMacSystemFont,"Hi
   function diagnose(){
     const a=$('name1').value.trim(), b=$('name2').value.trim();
     if(!a||!b){$('form').reportValidity();return;}
-    const isShin=a==='しんちゃん'||b==='しんちゃん';
+    const isShin=a==='しんちゃん.'||b==='しんちゃん.';
     const pct=special && isShin ? 100 : Math.floor(Math.random()*101);
     currentPct = pct;
     $('resultLabel').textContent=mode==='love'?'💕 恋愛相性 / Love Compatibility':'💋 SEX相性 / Sexual Compatibility';
@@ -101,7 +101,7 @@ body{margin:0;min-height:100svh;font-family:-apple-system,BlinkMacSystemFont,"Hi
     if(Date.now()-last>2500)taps=0; last=Date.now();
     if(++taps>=7){$('admin').classList.toggle('show');taps=0;update();}
   });
-  function update(){$('status').textContent='しんちゃん100%: '+(special?'ON':'OFF');}
+  function update(){$('status').textContent='しんちゃん. 100%: '+(special?'ON':'OFF');}
   $('toggle').addEventListener('click',()=>{
     special=!special;localStorage.setItem('crazy-love-special',special?'on':'off');update();
   });
