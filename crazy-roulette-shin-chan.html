@@ -77,11 +77,11 @@ const adminToggle=document.getElementById('adminToggle'),adminState=document.get
     const bg=slotsConfig.colors?.[i]??(i%2===0?'#ffd76b':'#14513f');
     ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle='#fff0bd';ctx.lineWidth=4;ctx.stroke();
     const label=slotsConfig.labels[i].replace(/\.$/,'');
-    // Sector centroid on its bisector. Both writing modes use the same center.
+    // Center of each sector; keep text upright independently of wheel rotation.
     const centerR=(4*r*Math.sin(Math.PI/n))/(3*TAU/n);
     const x=Math.cos(mid)*centerR,y=Math.sin(mid)*centerR;
     const rgb=parseInt(bg.slice(1),16),light=((rgb>>16)&255)*.299+((rgb>>8)&255)*.587+(rgb&255)*.114;
-    ctx.save();ctx.translate(x,y);ctx.fillStyle=light>150?'#211a12':'#fff';
+    ctx.save();ctx.translate(x,y);ctx.rotate(-rotation);ctx.fillStyle=light>150?'#211a12':'#fff';
     ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#0007';ctx.shadowBlur=3;
     const chars=Array.from(label);
     if(slotsConfig.textDirection==='horizontal'){
