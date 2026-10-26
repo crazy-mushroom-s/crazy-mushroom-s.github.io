@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-<main class="app"><h1 id="siteTitle">CRAZY ROULETTE</h1><h2 id="siteSubtitle" aria-label="管理者入口"></h2><div class="wheel-wrap"><div class="pointer" id="topPointer"></div><svg class="wheel-fallback" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="450" cy="450" r="439" fill="#b81427" stroke="#f5b859" stroke-width="11"/><path d="M450 29 A421 421 0 0 1 450 871 L450 450 Z" fill="#ffd76b" stroke="#fff0bd" stroke-width="4"/><path d="M450 871 A421 421 0 0 1 450 29 L450 450 Z" fill="#14513f" stroke="#fff0bd" stroke-width="4"/><g fill="#211a12" font-size="51" font-weight="900" text-anchor="middle"><text x="630" y="370">当</text><text x="630" y="425">た</text><text x="630" y="480">り</text><text x="630" y="535">🎯</text></g><g fill="#fff" font-size="51" font-weight="900" text-anchor="middle"><text x="270" y="397">ハ</text><text x="270" y="452">ズ</text><text x="270" y="507">レ</text></g><circle cx="450" cy="450" r="55" fill="#b81427" stroke="#ffe3a0" stroke-width="12"/><circle cx="450" cy="450" r="17" fill="#fff1b9"/></svg><canvas id="wheel" width="900" height="900" aria-label="CRAZY ROULETTE"></canvas></div><button id="spin">SPIN</button><div class="hint" id="status" aria-live="polite">24時間に1回チャレンジ！</div><div class="small">※挑戦記録はこのブラウザに保存されます。</div><div class="admin-mini" id="adminLogin" hidden><input id="adminPass" type="password" placeholder="管理者パスワード" autocomplete="off"><button type="button" id="adminToggle">解除</button></div><div class="admin-state" id="adminState"></div><section class="dashboard" id="dashboard"><h3>管理者画面 / 抽選履歴</h3><div class="title-editor"><label>タイトル<input id="editTitle" maxlength="80" placeholder="CRAZY ROULETTE"></label><label>タイトル下の文字（空欄OK）<input id="editSubtitle" maxlength="80" placeholder="空欄でもOK"></label><button type="button" id="saveTitles">文字を保存</button><p class="dash-note">変更はこのブラウザ内だけに保存されます。全員に反映するには公開HTMLの変更が必要です。</p></div><div class="title-editor"><h3>パスワード変更</h3><label>現在のパスワード<input id="oldPass" type="password" autocomplete="off"></label><label>新しいパスワード（6文字以上）<input id="newPass" type="password" autocomplete="off"></label><button type="button" id="changePass">パスワードを変更</button><p id="passMessage" class="dash-note"></p></div><div class="title-editor"><h3>時間制限・演出設定</h3><label style="display:flex;align-items:center;justify-content:space-between">回数制限 ON / OFF（24時間に1回） <input id="limitEnabled" type="checkbox" style="width:24px;height:24px" checked></label><label>当たりの演出<select id="winEffect"><option value="confetti">紙吹雪</option><option value="photo">SHIN-CHAN（写真200枚落下）</option><option value="none">演出なし</option></select></label><label>ハズレの演出<select id="loseEffect"><option value="photo">SHIN-CHAN（写真200枚落下）</option><option value="confetti">紙吹雪</option><option value="none">演出なし</option></select></label><p class="dash-note">設定はこのブラウザだけに保存されます。他の端末にも適用するにはサーバー側の設定管理が必要です。</p></div><div class="title-editor"><h3>ルーレット枠・色設定</h3><label>枠数（2〜10）<select id="slotCount"></select></label><div id="slotEditors"></div><label>枠内文字の表示方向<select id="textDirection"><option value="vertical">縦表示</option><option value="horizontal">横表示</option></select></label><p class="dash-note">縦・横どちらも各枠の中心に配置します。枠の割合は10%刻みで調整し、合計100%に自動調整します。</p><p class="dash-note">各枠の右側の色をタップして変更できます。</p><button type="button" id="saveSlots">枠と色の設定を保存</button><p class="dash-note">末尾に半角ドット「.」を付けた枠は当たり候補になります。ドットはルーレット画面に表示されません。設定はこのブラウザに保存されます。</p></div><div class="dash-stats"><div><strong id="totalCount">0</strong><small>総回数</small></div><div><strong id="winCount">0</strong><small>当たり</small></div><div><strong id="loseCount">0</strong><small>ハズレ</small></div></div><div class="odds-control"><label for="winOdds">当たり確率：<strong id="oddsValue">10%</strong></label><input id="winOdds" type="range" min="0" max="100" step="1" value="10"><div class="odds-ends"><span>0%（全てハズレ）</span><span>100%（全て当たり）</span></div><p class="dash-note">当たり確率は通常抽選に適用されます。ドット付き枠は優先して選ばれます。設定はこの端末だけに保存されます。</p></div><div class="history-wrap"><table class="history"><thead><tr><th>日時（日本時間）</th><th>結果</th><th>区分</th></tr></thead><tbody id="historyRows"></tbody></table></div><div class="dash-actions"><button type="button" id="exportHistory">CSV保存</button><button type="button" id="clearHistory">履歴削除</button></div><div class="dash-note">記録はこの端末・ブラウザ内だけに保存されます。他の人の端末で回された結果は集計されません。全員の記録を集めるには別途サーバー連携が必要です。</div></section></main>
+<main class="app"><h1 id="siteTitle">CRAZY ROULETTE</h1><h2 id="siteSubtitle" aria-label="管理者入口"></h2><div class="wheel-wrap"><div class="pointer" id="topPointer"></div><svg class="wheel-fallback" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="450" cy="450" r="439" fill="#b81427" stroke="#f5b859" stroke-width="11"/><path d="M450 29 A421 421 0 0 1 450 871 L450 450 Z" fill="#ffd76b" stroke="#fff0bd" stroke-width="4"/><path d="M450 871 A421 421 0 0 1 450 29 L450 450 Z" fill="#14513f" stroke="#fff0bd" stroke-width="4"/><g fill="#211a12" font-size="51" font-weight="900" text-anchor="middle"><text x="630" y="370">当</text><text x="630" y="425">た</text><text x="630" y="480">り</text><text x="630" y="535">🎯</text></g><g fill="#fff" font-size="51" font-weight="900" text-anchor="middle"><text x="270" y="397">ハ</text><text x="270" y="452">ズ</text><text x="270" y="507">レ</text></g><circle cx="450" cy="450" r="55" fill="#b81427" stroke="#ffe3a0" stroke-width="12"/><circle cx="450" cy="450" r="17" fill="#fff1b9"/></svg><canvas id="wheel" width="900" height="900" aria-label="CRAZY ROULETTE"></canvas></div><button id="spin">SPIN</button><div class="hint" id="status" aria-live="polite">24時間に1回チャレンジ！</div><div class="small">※挑戦記録はこのブラウザに保存されます。</div><div class="admin-mini" id="adminLogin" hidden><input id="adminPass" type="password" placeholder="管理者パスワード" autocomplete="off"><button type="button" id="adminToggle">解除</button></div><div class="admin-state" id="adminState"></div><section class="dashboard" id="dashboard"><h3>管理者画面 / 抽選履歴</h3><div class="title-editor"><label>タイトル<input id="editTitle" maxlength="80" placeholder="CRAZY ROULETTE"></label><label>タイトル下の文字（空欄OK）<input id="editSubtitle" maxlength="80" placeholder="空欄でもOK"></label><button type="button" id="saveTitles">文字を保存</button><p class="dash-note">変更はこのブラウザ内だけに保存されます。全員に反映するには公開HTMLの変更が必要です。</p></div><div class="title-editor"><h3>パスワード変更</h3><label>現在のパスワード<input id="oldPass" type="password" autocomplete="off"></label><label>新しいパスワード（6文字以上）<input id="newPass" type="password" autocomplete="off"></label><button type="button" id="changePass">パスワードを変更</button><p id="passMessage" class="dash-note"></p></div><div class="title-editor"><h3>時間制限・演出設定</h3><label style="display:flex;align-items:center;justify-content:space-between">回数制限 ON / OFF（24時間に1回） <input id="limitEnabled" type="checkbox" style="width:24px;height:24px" checked></label><label>当たりの演出<select id="winEffect"><option value="confetti">紙吹雪</option><option value="photo">SHIN-CHAN（写真200枚落下）</option><option value="none">演出なし</option></select></label><label>ハズレの演出<select id="loseEffect"><option value="photo">SHIN-CHAN（写真200枚落下）</option><option value="confetti">紙吹雪</option><option value="none">演出なし</option></select></label><p class="dash-note">設定はこのブラウザだけに保存されます。他の端末にも適用するにはサーバー側の設定管理が必要です。</p></div><div class="title-editor"><h3>ルーレット枠・色設定</h3><label>枠数（2〜6）<select id="slotCount"></select></label><div id="slotEditors"></div><label>枠内文字の表示方向<select id="textDirection"><option value="vertical">縦表示</option><option value="horizontal">横表示</option></select></label><label>文字サイズ（全枠共通）：<output id="fontSizeValue">30</output><input id="fontSize" type="range" min="14" max="48" step="1" value="30" style="display:block;width:100%;accent-color:#ffdc70"></label><label>文字の位置<select id="textPosition"><option value="inner">内側</option><option value="center" selected>中央</option><option value="outer">外側</option></select></label><p class="dash-note">縦・横どちらも各枠の中心に配置します。枠の割合は10%刻みで調整し、合計100%に自動調整します。</p><p class="dash-note">各枠の右側の色をタップして変更できます。</p><button type="button" id="saveSlots">枠と色の設定を保存</button><p class="dash-note">末尾に半角ドット「.」を付けた枠は当たり候補になります。ドットはルーレット画面に表示されません。設定はこのブラウザに保存されます。</p></div><div class="dash-stats"><div><strong id="totalCount">0</strong><small>総回数</small></div><div><strong id="winCount">0</strong><small>当たり</small></div><div><strong id="loseCount">0</strong><small>ハズレ</small></div></div><div class="odds-control"><label for="winOdds">当たり確率：<strong id="oddsValue">10%</strong></label><input id="winOdds" type="range" min="0" max="100" step="1" value="10"><div class="odds-ends"><span>0%（全てハズレ）</span><span>100%（全て当たり）</span></div><p class="dash-note">当たり確率は通常抽選に適用されます。ドット付き枠は優先して選ばれます。設定はこの端末だけに保存されます。</p></div><div class="history-wrap"><table class="history"><thead><tr><th>日時（日本時間）</th><th>結果</th><th>区分</th></tr></thead><tbody id="historyRows"></tbody></table></div><div class="dash-actions"><button type="button" id="exportHistory">CSV保存</button><button type="button" id="clearHistory">履歴削除</button></div><div class="dash-note">記録はこの端末・ブラウザ内だけに保存されます。他の人の端末で回された結果は集計されません。全員の記録を集めるには別途サーバー連携が必要です。</div></section></main>
 <div id="overlay" class="overlay" aria-live="assertive"></div>
 <script>
 (()=>{'use strict';
@@ -29,11 +29,12 @@ const HISTORYKEY='crazy-roulette-shin-chan-history-v1';
  const limitInput=document.getElementById('limitEnabled'),winEffect=document.getElementById('winEffect'),loseEffect=document.getElementById('loseEffect');limitInput.checked=settings.limit;winEffect.value=settings.win;loseEffect.value=settings.lose;function saveSettings(){if(!admin)return;settings={limit:limitInput.checked,win:winEffect.value,lose:loseEffect.value};try{localStorage.setItem(SETTINGSKEY,JSON.stringify(settings))}catch(e){}update()}[limitInput,winEffect,loseEffect].forEach(el=>el.addEventListener('change',saveSettings));
 const dashboard=document.getElementById('dashboard');
  const SLOTKEY='crazy-roulette-slots-v2';
- let slotsConfig={labels:['当たり🎯','ハズレ'],colors:['#ffd76b','#14513f'],textDirection:'vertical',weights:[50,50]};
- try{const v=JSON.parse(localStorage.getItem(SLOTKEY)||'null');if(v&&Array.isArray(v.labels)&&v.labels.length>=2&&v.labels.length<=10)slotsConfig={...slotsConfig,...v}}catch(e){}
+ let slotsConfig={labels:['当たり🎯','ハズレ'],colors:['#ffd76b','#14513f'],textDirection:'horizontal',weights:[50,50]};
+ try{const v=JSON.parse(localStorage.getItem(SLOTKEY)||'null');if(v&&Array.isArray(v.labels)&&v.labels.length>=2&&v.labels.length<=6)slotsConfig={...slotsConfig,...v}}catch(e){}
+ slotsConfig.fontSize=Math.min(48,Math.max(14,Number(slotsConfig.fontSize)||30));slotsConfig.textPosition=['inner','center','outer'].includes(slotsConfig.textPosition)?slotsConfig.textPosition:'center';
  slotsConfig.weights=normalizeWeights(Array.from({length:slotsConfig.labels.length},(_,i)=>slotsConfig.weights?.[i]??100/slotsConfig.labels.length));
   const slotCount=document.getElementById('slotCount'),slotEditors=document.getElementById('slotEditors');
- for(let n=2;n<=10;n++){const op=document.createElement('option');op.value=n;op.textContent=n+'枠';slotCount.appendChild(op)}
+ for(let n=2;n<=6;n++){const op=document.createElement('option');op.value=n;op.textContent=n+'枠';slotCount.appendChild(op)}
    // All segment sizes are multiples of 10%, with a minimum of 10%.
   function normalizeWeights(values){
     const n=values.length;if(!n)return [];
@@ -87,8 +88,9 @@ function renderSlotEditors(){
      slider.addEventListener('input',()=>syncWeights(i));
    }
  }
+ const fontSizeInput=document.getElementById('fontSize'),fontSizeValue=document.getElementById('fontSizeValue'),textPositionInput=document.getElementById('textPosition');fontSizeInput.value=slotsConfig.fontSize;fontSizeValue.textContent=slotsConfig.fontSize;textPositionInput.value=slotsConfig.textPosition;fontSizeInput.addEventListener('input',()=>{fontSizeValue.textContent=fontSizeInput.value});
  slotCount.value=slotsConfig.labels.length;document.getElementById('textDirection').value=slotsConfig.textDirection==='horizontal'?'horizontal':'vertical';renderSlotEditors();slotCount.addEventListener('change',renderSlotEditors);
- document.getElementById('saveSlots').addEventListener('click',()=>{if(!admin)return;slotsConfig={labels:[...slotEditors.querySelectorAll('input[type=text]')].map((x,i)=>x.value.trim()||('選択肢'+(i+1))),colors:[...slotEditors.querySelectorAll('input[type=color]')].map(x=>x.value),textDirection:document.getElementById('textDirection').value,weights:normalizeWeights(currentWeights())};localStorage.setItem(SLOTKEY,JSON.stringify(slotsConfig));draw();alert('枠・色・範囲設定を保存しました')});
+ document.getElementById('saveSlots').addEventListener('click',()=>{if(!admin)return;slotsConfig={labels:[...slotEditors.querySelectorAll('input[type=text]')].map((x,i)=>x.value.trim()||('選択肢'+(i+1))),colors:[...slotEditors.querySelectorAll('input[type=color]')].map(x=>x.value),textDirection:document.getElementById('textDirection').value,weights:normalizeWeights(currentWeights()),fontSize:Number(fontSizeInput.value),textPosition:textPositionInput.value};localStorage.setItem(SLOTKEY,JSON.stringify(slotsConfig));draw();alert('枠・色・範囲設定を保存しました')});
  function sectorWeights(){const n=slotsConfig.labels.length;return normalizeWeights(Array.from({length:n},(_,i)=>slotsConfig.weights?.[i]??100/n))}
  function sectorBounds(i){const weights=sectorWeights();const before=weights.slice(0,i).reduce((a,b)=>a+b,0)/100*TAU;return [-Math.PI/2+before,-Math.PI/2+(before+weights[i]/100*TAU)]}
  const login=document.getElementById('adminLogin');
@@ -131,35 +133,26 @@ const adminToggle=document.getElementById('adminToggle'),adminState=document.get
     ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,r,a,b);ctx.closePath();
     const bg=slotsConfig.colors?.[i]??(i%2===0?'#ffd76b':'#14513f');
     ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle='#fff0bd';ctx.lineWidth=4;ctx.stroke();
-    const label=slotsConfig.labels[i].replace(/\.$/,'');
-     // Place text at the geometric centroid of the circular sector.
-     const half=(b-a)/2;
-     const centerR=(4*r*Math.sin(half))/(3*Math.max(.0001,b-a));
+         const label=slotsConfig.labels[i].replace(/\.$/,'');
+     // Place text on a consistent ring outside the central hub, even for a 70-90% sector.
+     const ringFactor=slotsConfig.textPosition==='inner'?.57:slotsConfig.textPosition==='outer'?.80:.69;
+     const centerR=r*ringFactor;
      const x=Math.cos(mid)*centerR,y=Math.sin(mid)*centerR;
      const rgb=parseInt(bg.slice(1),16),light=((rgb>>16)&255)*.299+((rgb>>8)&255)*.587+(rgb&255)*.114;
      ctx.save();
-     // Clip lettering to the segment, avoiding overflow even on narrow sectors.
      ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,r-8,a,b);ctx.closePath();ctx.clip();
      ctx.translate(x,y);ctx.rotate(-rotation);
      ctx.fillStyle=light>150?'#211a12':'#fff';
-     ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#0007';ctx.shadowBlur=3;
+     ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#0007';ctx.shadowBlur=2;
      const chars=Array.from(label);
-     const availableWidth=Math.max(12,2*centerR*Math.sin(half)*.86);
-     const availableHeight=Math.max(12,Math.min(2*(r-centerR)*.9,2*centerR*.9));
-     if(slotsConfig.textDirection==='horizontal'){
-       let font=Math.min(55,availableHeight*.65);
-       ctx.font='900 '+font+'px system-ui,sans-serif';
-       while(font>9&&ctx.measureText(label).width>availableWidth){font--;ctx.font='900 '+font+'px system-ui,sans-serif'}
-       ctx.fillText(label,0,0,availableWidth);
-     }else{
-       const font=Math.max(9,Math.min(53,availableWidth*.85,availableHeight/Math.max(1,chars.length)/1.1));
-       const line=font*1.08;
-       ctx.font='900 '+font+'px system-ui,sans-serif';
-       chars.forEach((ch,j)=>ctx.fillText(ch,0,(j-(chars.length-1)/2)*line));
-     }
-    ctx.restore();
-  }
-  ctx.beginPath();ctx.arc(0,0,55,0,TAU);ctx.fillStyle='#b81427';ctx.fill();ctx.strokeStyle='#ffe3a0';ctx.lineWidth=12;ctx.stroke();
+     // A single shared font size is computed before drawing every sector.
+     const font=sharedFontSize;
+     ctx.font='900 '+font+'px system-ui,sans-serif';
+     if(slotsConfig.textDirection==='horizontal')ctx.fillText(label,0,0);
+     else {const line=font*1.12;chars.forEach((ch,j)=>ctx.fillText(ch,0,(j-(chars.length-1)/2)*line));}
+     ctx.restore();
+   }
+   ctx.beginPath();ctx.arc(0,0,55,0,TAU);ctx.fillStyle='#b81427';ctx.fill();ctx.strokeStyle='#ffe3a0';ctx.lineWidth=12;ctx.stroke();
   ctx.beginPath();ctx.arc(0,0,17,0,TAU);ctx.fillStyle='#fff1b9';ctx.fill();ctx.restore();
  }
 
