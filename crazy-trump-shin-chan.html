@@ -20,7 +20,7 @@ let win=false;
 if(config.mode==='prize'){
  const wins=[Math.min(Math.max(0,config.winIndex||0),config.labels.length-1)];
  const loses=config.labels.map((_,i)=>i).filter(i=>!wins.includes(i));
- if(marked>=0){win=true}else{win=Math.random()*100<Number(config.odds||0);const usedLabels=new Set(picks.map(p=>p.label));const uniquePool=(win?wins:loses).filter(i=>!usedLabels.has(config.labels[i].replace(/\.$/,'')));const fallbackPool=config.labels.map((_,i)=>i).filter(i=>!usedLabels.has(config.labels[i].replace(/\.$/,'')));const pool=uniquePool.length?uniquePool:fallbackPool;if(pool.length){target=pool[Math.floor(Math.random()*pool.length)];win=wins.includes(target)}else{target=chosen;win=wins.includes(target)}}
+ if(marked>=0){win=true}else{win=Math.random()*100<Number(config.odds||0);const usedLabels=new Set(picks.map(p=>p.label));const candidatePool=win?wins:loses;const uniquePool=candidatePool.filter(i=>!usedLabels.has(config.labels[i].replace(/\.$/,'')));const pool=uniquePool.length?uniquePool:candidatePool;if(pool.length){target=pool[Math.floor(Math.random()*pool.length)];}else{target=chosen;}}
 }else win=marked>=0;
 const label=config.labels[target].replace(/\.$/,'');
 const card=$('cards').children[chosen];
