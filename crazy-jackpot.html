@@ -18,7 +18,7 @@ function render(){picks=0;busy=false;finished=false;$('overlay').classList.remov
  finished=true;
  [...$('cards').children].forEach(c=>{if(!c.classList.contains('revealed'))c.classList.add('dim')});
  if(win){$('status').textContent='JACKPOT!';sound('jackpot');setTimeout(showRealWin,1100)}
- else{sound('lose');$('status').textContent='LOSE!';setTimeout(showLose,1100)}
+ else{sound('lose');$('status').textContent='LOSE!';setTimeout(showDummyReveal,1100)}
 }
 function resultOverlay(){
  const ov=$('overlay');ov.replaceChildren();ov.classList.add('show');
@@ -39,21 +39,50 @@ function showRealWin(){
  }
  const result=document.createElement('div');result.className='result';result.textContent='JACKPOT!';ov.append(result);
 }
-function showLose(){
- const ov=resultOverlay();
- const msg=document.createElement('div');
- msg.className='result lose-result';
- msg.textContent='LOSE';
- ov.append(msg);
- $('status').textContent='LOSE!';
-}
-async function countVisit(){
- const out=$('visitCount');
- try{
-  const response=await fetch('https://api.counterapi.dev/v1/crazy-mushroom-s/jackpot-chan-chan/up',{cache:'no-store'});
-  if(!response.ok)throw Error('counter unavailable');
-  const data=await response.json();out.textContent=Number(data.count).toLocaleString('en-US');
- }catch(e){out.textContent='—'}
-}
+ function showDummyReveal(){
+  // Both chosen cards are LOSE. Reveal a JACKPOT on an unchosen card as a dummy demonstration.
+  const remaining=[...$('cards').children].filter(c=>!c.classList.contains('revealed'));
+  const fake=remaining[Math.floor(Math.random()*remaining.length)];
+  if(!fake){showLose();return}
+  $('status').textContent='WAIT...';
+  fake.classList.remove('dim');
+  setTimeout(()=>{
+   const back=fake.querySelector('.back');back.classList.add('win');
+   back.querySelector('span').textContent='JACKPOT!';
+   const img=document.createElement('img');img.src='jackpot.shin-chan.jpg';img.alt='JACKPOT';
+   img.onerror=()=>img.remove();back.append(img);
+   fake.classList.add('revealed');sound('flip');
+   $('status').textContent='JACKPOT WAS HERE!';
+   setTimeout(showLose,1900);
+  },850);
+ }
+ function showLose(){
+  const ov=resultOverlay();
+  const msg=document.createElement('div');msg.className='result lose-result';msg.textContent='LOSE';ov.append(msg);
+  $('status').textContent='LOSE!';
+ }
+ async function countVisit(){
+  const out=$('visitCount');const label=out.parentElement;
+  const key='crazy-jackpot-local-visits';
+  let local=0;
+  try{local=Number(localStorage.getItem(key)||0)+1;localStorage.setItem(key,String(local))}catch(e){local=1}
+  // The remote counter is shared between devices; local fallback is not a global total.
+  for(let attempt=0;attempt<2;attempt++){
+   try{
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),6500);
+    let response;
+    try{response=await fetch('https://api.counterapi.dev/v1/crazy-mushroom-s/jackpot-chan-chan/'+(attempt===0?'up':'get'),{cache:'no-store',signal:controller.signal})}
+    finally{clearTimeout(timer)}
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();
+    const count=Number(data.count);
+    if(!Number.isFinite(count))throw Error('Invalid counter response');
+    out.textContent=count.toLocaleString('en-US');label.firstChild.textContent='TOTAL VISITS ';return;
+   }catch(e){console.warn('Visit counter unavailable',e)}
+  }
+  label.firstChild.textContent='THIS DEVICE VISITS ';
+  out.textContent=local.toLocaleString('en-US');
+ }
 $('reset').addEventListener('click',render);render();countVisit()})();
 </script></body></html>
