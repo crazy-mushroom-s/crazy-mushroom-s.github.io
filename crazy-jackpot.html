@@ -9,7 +9,7 @@ document.getElementById('cheatTitle').addEventListener('click',()=>{const now=Da
  if(busy||finished||card.classList.contains('revealed'))return;
  if(limitUI())return;
  unlockSound();sound('flip');busy=true;
- const win=(picks===1) ? (Math.random()<0.05) : false; // First card always LOSE; second card 5% win
+ const win=(picks===1) ? (Math.random()<0.20) : false; // First card always LOSE; second card 20% win
  const back=card.querySelector('.back');back.classList.toggle('win',win);
  back.querySelector('span').textContent=win?'':'LOSE';
  if(win){const img=document.createElement('img');img.src='jackpot.shin-chan.jpg';img.alt='JACKPOT';img.onerror=()=>{img.remove();back.querySelector('span').textContent='JACKPOT!'};back.append(img)}
