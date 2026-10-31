@@ -56,7 +56,7 @@ function showRealWin(){
    const img=document.createElement('img');img.src='jackpot.shin-chan.jpg';img.alt='JACKPOT';
    img.onerror=()=>img.remove();back.append(img);
    fake.classList.add('revealed');sound('flip');
-   $('status').textContent='JACKPOT WAS HERE!';
+   $('status').textContent='';
    setTimeout(showLose,1900);
   },850);
  }
